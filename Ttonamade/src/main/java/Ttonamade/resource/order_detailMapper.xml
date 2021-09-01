@@ -14,8 +14,11 @@
 		where order_id = #{order_id} and order_seq=#{order_seq}
 	</select>
 	<insert id="insert" parameterType="odDto">
-		insert into order_detail(order_id, order_seq, prod_id, prod_name, prod_price, order_count)
-		values (#{id}, #{password}, #{name}, #{phone}, #{ulevel})
+		insert into order_detail( order_id, order_seq, prod_id, prod_name, prod_price, order_count)
+		select #{order_id}, order_detail_seq.nextval, prod_id,prod_name,prod_name, order_count
+		from cart_info 
+		where cust_id = #{cust_id}
+		 
 	</insert>
 	<update id="update" parameterType="odDto">
 		update order_detail
